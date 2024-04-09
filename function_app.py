@@ -1,7 +1,5 @@
 import logging
 import azure.functions as func
-import LogAutomation
-import queries_list
 app = func.FunctionApp()
 
 @app.schedule(schedule="0 * * * * *", arg_name="myTimer", run_on_startup=True,
@@ -9,5 +7,4 @@ app = func.FunctionApp()
 def timer_trigger(myTimer: func.TimerRequest) -> None:
     if myTimer.past_due:
         logging.info('The timer is past due!')
-    LogAutomation.execute_queries(LogAutomation.quries,"lock-error-count.xlsx")
     logging.info('Python timer trigger function executed.')
